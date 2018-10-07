@@ -3,8 +3,8 @@ import {View, Text, StyleSheet, Alert} from "react-native";
 import {Button, Overlay, Input} from "react-native-elements";
 
 const styles = StyleSheet.create({
-	input: {
-		marginTop: -20
+	overlayStyle: {
+		zIndex: 1
 	}
 })
 
@@ -41,7 +41,9 @@ class Note extends Component {
 				<View>
 					<Overlay
 							isVisible={overlayOpen}
-							windowBackgroundColor="rgba(0, 0, 0, .5)"
+							overlayStyle={styles.overlayStyle}
+							containerStyle={styles.overlayStyle}
+							style={styles.overlayStyle}
 							onBackdropPress={() => this.setState({overlayOpen: false})}
 					>
 						<View>
