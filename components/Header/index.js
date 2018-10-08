@@ -5,6 +5,29 @@ import Left from "./LeftComponent";
 import Center from "./CenterComponent";
 import Right from "./RightComponent";
 
+export const styles = StyleSheet.create({
+	header: {
+		paddingTop: 20
+	},
+	view: {
+		padding: 0,
+	},
+	button: {
+		backgroundColor: "#476EC5",
+	},
+	icon: {
+		fontSize: 20,
+	},
+	text: {
+		color: "#fff"
+	},
+	innerOverlayStyle: {
+		zIndex: 2,
+		position: "absolute",
+		width: "100%",
+		height: "100%"
+	},
+})
 
 class HeaderComponent extends Component {
 	state = {
@@ -29,8 +52,6 @@ class HeaderComponent extends Component {
 					<Overlay
 							isVisible={menuIsOpen}
 							windowBackgroundColor="rgba(0, 0, 0, .5)"
-							width="auto"
-							height="auto"
 							onBackdropPress={() => this.setState({menuIsOpen: false})}
 					>
 						<Text>Hello from Overlay!</Text>
@@ -41,22 +62,6 @@ class HeaderComponent extends Component {
 }
 
 
-export const styles = StyleSheet.create({
-	header: {
-		paddingTop: 20
-	},
-	view: {
-		padding: 0,
-	},
-	button: {
-		backgroundColor: "#476EC5",
-	},
-	icon: {
-		fontSize: 20,
-	},
-	text: {
-		color: "#fff"
-	}
-})
+
 
 export default HeaderComponent

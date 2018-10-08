@@ -4,7 +4,17 @@ import {Button, Overlay, Input} from "react-native-elements";
 
 const styles = StyleSheet.create({
 	overlayStyle: {
-		zIndex: 1
+		width: "100%",
+		height: "auto",
+	},
+	innerStyle: {
+		width: "100%",
+		height: "auto",
+		paddingBottom: 20
+	},
+	inputWrap: {
+		width: "100%",
+		marginBottom: 20
 	}
 })
 
@@ -24,7 +34,6 @@ class Note extends Component {
 		const {inputText} = this.state;
 		this.props.addNote(inputText);
 		this.setState({
-			overlayOpen: false,
 			inputText: ""
 		})
 	}
@@ -42,21 +51,26 @@ class Note extends Component {
 					<Overlay
 							isVisible={overlayOpen}
 							overlayStyle={styles.overlayStyle}
-							containerStyle={styles.overlayStyle}
-							style={styles.overlayStyle}
+							style={styles.innerStyle}
 							onBackdropPress={() => this.setState({overlayOpen: false})}
 					>
 						<View>
 							<Input
 									value={inputText}
+									containerStyle={styles.inputWrap}
 									placeholder='Jot down your note'
 									onChangeText={(value) => this._inputHandle(value)}
 							/>
-							<Button title="Submit" onPress={this._submitHandle} />
+							<Button
+									title="Submit"
+									buttonStyle={{
+										backgroundColor: "#e24747",
+									}}
+									onPress={this._submitHandle} />
 						</View>
 					</Overlay>;
 					<Button
-							title="Add note"
+							title={overlayOpen ? "Close" : "Add note"}
 							onPress={this._onPressHandle}
 					/>
 				</View>

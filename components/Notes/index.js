@@ -1,7 +1,15 @@
 import React, {Component} from 'react';
-import {View, Text} from "react-native";
-import { ListItem } from 'react-native-elements'
+import {View, Text, StyleSheet, ScrollView, Alert} from "react-native";
+import {ListItem, Icon} from 'react-native-elements'
 import Note from "../Note";
+
+const styles = StyleSheet.create({
+	notFound: {
+		padding: 20,
+		width: "100%",
+		textAlign: "center"
+	}
+});
 
 class Notes extends Component {
 	state = {
@@ -14,6 +22,15 @@ class Notes extends Component {
 		}))
 	};
 
+	_deleteHandle = value => {
+		const {notes} = this.state;
+		const index = notes.indexOf(value);
+		notes.splice(index);
+		this.setState({
+			notes: notes
+		})
+	}
+
 	_notesRender = () => {
 		const {notes} = this.state;
 		return notes && notes.length ? notes.map((item, i) => {
@@ -22,14 +39,13 @@ class Notes extends Component {
 							key={i}
 							leftIcon={{name: "note"}}
 							title={item}
+							rightIcon={<Icon onPress={() => this._deleteHandle(item)} name='delete' />}
 					/>
 			)
 		}) : (
-				<View>
-					<Text>
-						Start adding some notes
-					</Text>
-				</View>
+				<Text style={styles.notFound}>
+					Start adding some notes
+				</Text>
 		)
 
 	}
@@ -38,9 +54,9 @@ class Notes extends Component {
 		return (
 				<View>
 					<Note addNote={this._addNoteHandle}/>
-					<View>
+					<ScrollView style={{paddingBottom: 20}}>
 						{this._notesRender()}
-					</View>
+					</ScrollView>
 				</View>
 		);
 	}
